@@ -8,12 +8,13 @@ def get_call_price(spot, strike, rfr, vol, term):
     return price
 
 def main():
-    spotPrice = float(input("Spot price: "))
-    exercisePrice = float(input("Exercise price: "))
-    riskFreeRate = float(input("Risk free rate: "))
-    volatility = float(input("Volatility: "))
-    timeToMaturity = float(input("Term (years): "))
-    print(get_call_price(spotPrice, exercisePrice, riskFreeRate, volatility, timeToMaturity))
+    spotPrice = float(input("Spot price (ex: $30): ").replace("$",""))
+    exercisePrice = float(input("Exercise price (ex: $32.5): ").replace("$",""))
+    riskFreeRate = float(input("Risk free rate (ex: 5%): ").replace("%","")) / 100
+    volatility = float(input("Volatility (ex: 8.5%): ").replace("%","")) / 100
+    timeToMaturity = float(input("Time to expiration in years (ex: 1.5 years): ").replace("years","").replace("year",""))
+    callPrice = get_call_price(spotPrice, exercisePrice, riskFreeRate, volatility, timeToMaturity)
+    print("\nCall price: ${0}".format(callPrice))
 
 if __name__ == "__main__":
     main()
