@@ -16,7 +16,7 @@ def get_call_price(spot, strike, rfr, vol, term):
     """
     d1 = Decimal('1') / (vol * term.sqrt()) * ((spot/strike).ln() + (rfr + vol ** Decimal('2') / Decimal('2')) * term)
     d2 = d1 - vol * term.sqrt()
-    return mpmath.ncdf(d1) * spot - mpmath.ncdf(d2) * strike * (-rfr * term).exp()
+    return Decimal(str(mpmath.ncdf(d1) * spot - mpmath.ncdf(d2) * strike * (-rfr * term).exp()))
 
 def get_put_price(spot, strike, rfr, vol, term):
     """This method calculates the value of a European put option using Black Scholes
@@ -33,7 +33,7 @@ def get_put_price(spot, strike, rfr, vol, term):
     """
     d1 = Decimal('1') / (vol * term.sqrt()) * ((spot/strike).ln() + (rfr + vol ** Decimal('2') / Decimal('2')) * term)
     d2 = d1 - vol * term.sqrt()
-    return mpmath.ncdf(-d2) * strike * (-rfr * term).exp() - mpmath.ncdf(-d1) * spot
+    return Decimal(str(mpmath.ncdf(-d2) * strike * (-rfr * term).exp() - mpmath.ncdf(-d1) * spot))
 
 def main():
     # Gather the inputs from the user
